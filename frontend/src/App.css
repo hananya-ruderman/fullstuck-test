@@ -11,6 +11,16 @@
   display: flex;
   gap: 1rem;
 }
-.teble{
-  background-color: blue;
+tr{
+  background-color: gray;
+  border: 2px solid black;
+  color: black;
+}
+td{
+  padding: 1rem;
+}
+.header{
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
 }

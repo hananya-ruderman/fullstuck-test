@@ -2,7 +2,7 @@
 import Row from "./Row";
 
 export default function TableData({ data }) {
-  
+
 
     return (
 
@@ -11,14 +11,14 @@ export default function TableData({ data }) {
                 <thead>
                     <tr>
                         <th className="first-col">
-                        event_id 
-                        
+                            event_id
+
                         </th>
                         <th>
-                        year
+                            year
                         </th>
                         <th>
-                        country
+                            country
                         </th>
                         <th>
                             city
@@ -33,7 +33,7 @@ export default function TableData({ data }) {
                 </thead>
                 <tbody>
 
-                    {data.map((item,index) =>
+                    {data.map((item, index) =>
 
                         (<Row key={index} event={item} />)
 

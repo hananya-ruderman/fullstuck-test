@@ -2,7 +2,7 @@
 
 export default function Row({ event }) {
     return (
-        <tr className="row">
+        <tr>
             <td>{event.eventId}</td>
                 
             <td>{event.iyear}</td>

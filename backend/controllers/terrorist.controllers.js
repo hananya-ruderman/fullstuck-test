@@ -21,16 +21,16 @@ export function newTerrorist(req, res) {
             skip_empty_lines: true
         });
 
-        const newComplaint = {
+        const newTerrorist= {
             ...req.body,
             _id: Date.now().toString(),
             createdAt: Date.now().toString()
         };
-        records.push(newComplaint);
+        records.push(newTerrorist);
 
         const output = stringify(records, {
             header: true,
-            columns: Object.keys(newComplaint)
+            columns: Object.keys(newTerrorist)
         });
         fs.writeFileSync(filePath, output);
     } catch (error) {
@@ -41,16 +41,16 @@ export function newTester(req, res) {
     try {
         const filePath = path.resolve(RESULTS_PATH);
         const fileData = fs.readFileSync(filePath, "utf-8");
-        const complaints = JSON.parse(fileData);
+        const tester = JSON.parse(fileData);
 
-        const newComplaint = {
+        const newTester = {
             ...req.body,
             _id: Date.now().toString(),
             createdAt: Date.now()
         };
-        complaints.push(newComplaint);
-        fs.writeFileSync(filePath, JSON.stringify(complaints, null, 2));
-        res.json(newComplaint);
+        tester.push(newTester);
+        fs.writeFileSync(filePath, JSON.stringify(tester, null, 2));
+        res.json(newTester);
     } catch (error) {
         res.status(500).json({ error: "Failed to save tester" });
     }
@@ -61,8 +61,8 @@ export async function getAllTesters(req, res) {
     try {
         const filePath = path.resolve(RESULTS_PATH);
         const fileData = fs.readFileSync(filePath, "utf-8");
-        const complaints = JSON.parse(fileData);
-        res.json(complaints);
+        const testers = JSON.parse(fileData);
+        res.json(testers);
     } catch (error) {
         res.status(500).json({ error: "Failed to load tester data" });
     }

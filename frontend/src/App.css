@@ -1,0 +1,16 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: lightslategray;
+}
+
+.search-box{
+  padding: 2rem;
+  background-color: blanchedalmond;
+  display: flex;
+  gap: 1rem;
+}
+.teble{
+  background-color: blue;
+}

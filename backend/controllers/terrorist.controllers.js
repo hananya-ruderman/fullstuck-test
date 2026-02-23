@@ -39,6 +39,7 @@ export function newTerrorist(req, res) {
 }
 export function newTester(req, res) {
     try {
+        console.log(req.body)
         const filePath = path.resolve(RESULTS_PATH);
         const fileData = fs.readFileSync(filePath, "utf-8");
         const tester = JSON.parse(fileData);
@@ -70,13 +71,14 @@ export async function getAllTesters(req, res) {
 
 export async function getAllTerrorists(req, res) {
     try {
+        const {limit} = req.query
         const filePath = path.resolve(CSV_PATH);
         const fileData = fs.readFileSync(filePath, "utf-8");
         const records = parse(fileData, {
             columns: true,
             skip_empty_lines: true
         });
-        const sliced = records.slice(0,50)
+        const sliced = records.slice(0,limit)
         res.json(sliced);
     } catch (error) {
         res.status(500).json({ error: "Failed to load terrorists data" });

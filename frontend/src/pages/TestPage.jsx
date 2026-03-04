@@ -1,3 +1,55 @@
+import { useState, useRef, useEffect } from "react"
+import { useNavigate } from "react-router"
+import useStore from "../store/useStore"
+
+export function TestPage(){
+    const navigate = useNavigate()
+    const data = useStore((s) => s.data)
+    const [current, setCurrent] = useState(null)
+    const ref = useRef(null)
+
+    useEffect(() => {
+        if (data && data.length > 0) ref.current = data
+    }, [data])
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        if (!ref.current || ref.current.length === 0) return
+        const idx = Math.floor(Math.random() * ref.current.length)
+        const item = ref.current[idx]
+        setCurrent(item)
+        console.log('submitted item:', item)
+    }
+
+    function handleBackClick(){
+        navigate('/')
+    }
+
+    function handleNextClick() {
+        if (!ref.current || ref.current.length === 0) return
+        const idx = Math.floor(Math.random() * ref.current.length)
+        setCurrent(ref.current[idx])
+    }
+
+    return(
+        <>
+        <div>terror data quiz</div>
+        <div>
+            <form onSubmit={handleSubmit}>
+                <div>{current ? JSON.stringify(current) : 'No question yet'}</div>
+                <input type="text" placeholder="type..." />
+                <button type="submit">submit</button>
+            </form>
+        </div>
+        <div>
+            <button onClick={handleBackClick}>back to data page</button>
+            <button onClick={handleNextClick}>next</button>
+        </div>
+        </>
+    )
+}
+
+export default TestPage
 import { useState } from "react"
 import { useRef, useEffect} from "react"
 import { useNavigate } from "react-router"
@@ -22,9 +74,11 @@ export function TestPage({data}){
     
 
 
-    function handleSubmit (e){
-        e.preventDefoult()
-        const item = data[(Math.random() * 50)]
+    function handleSubmit(e) {
+        e.preventDefault()
+        if (!ref.current || ref.current.length === 0) return
+        const idx = Math.floor(Math.random() * ref.current.length)
+        const item = ref.current[idx]
         console.log(item)
     }
 
@@ -32,8 +86,10 @@ export function TestPage({data}){
         navigate('/')
     }
     
-    function handlenextClick(){
-        setNext(!next)
+    function handleNextClick() {
+        if (!ref.current || ref.current.length === 0) return
+        const idx = Math.floor(Math.random() * ref.current.length)
+        setCurrent(ref.current[idx])
     }
 
     function  datafor(){
@@ -49,7 +105,7 @@ export function TestPage({data}){
             <form>
                 <div>{ref.current}</div>
                 <input type="text" placeholder="type..." />
-                <button type="submit" onSubmit={handleSubmit}>submit</button>
+                <button type="submit">submit</button>
             </form>
         </div>
         <div>
